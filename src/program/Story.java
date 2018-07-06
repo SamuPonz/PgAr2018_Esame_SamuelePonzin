@@ -3,6 +3,8 @@ package program;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+import libraries.MyMenu;
+
 public class Story implements Comparable<Story>{
 
 	private String title;
@@ -10,13 +12,20 @@ public class Story implements Comparable<Story>{
 	private int numberOfChapters;
 	private ArrayList<Paragraph> chapters = new ArrayList<Paragraph>();
 	private Paragraph initialChapter;
-	private ArrayList<Paragraph> finalChapters = new ArrayList<Paragraph>();
+//	private ArrayList<Paragraph> finalChapters = new ArrayList<Paragraph>();
 	
-	public Story() {
+	public Story(String title, int numberOfChapters) {
+		this.title = title;
+		this.numberOfChapters = numberOfChapters;
 	}
 	
-	public void play() {
-		
+	public String preview() {
+		StringBuffer str = new StringBuffer();
+		str.append(title);
+		str.append('\n');
+		str.append("Chapters: ");
+		str.append(numberOfChapters);
+		return str.toString();
 	}
 	
 	public int compareTo(Story s1) {
@@ -61,13 +70,13 @@ public class Story implements Comparable<Story>{
 		this.initialChapter = initialChapter;
 	}
 
-	public ArrayList<Paragraph> getFinalChapters() {
-		return finalChapters;
-	}
-
-	public void setFinalChapters(ArrayList<Paragraph> finalChapters) {
-		this.finalChapters = finalChapters;
-	}
+//	public ArrayList<Paragraph> getFinalChapters() {
+//		return finalChapters;
+//	}
+//
+//	public void setFinalChapters(ArrayList<Paragraph> finalChapters) {
+//		this.finalChapters = finalChapters;
+//	}
 
 	public String getTitle() {
 		return title;
