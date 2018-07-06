@@ -1,4 +1,7 @@
 package libraries;
+
+import java.util.ArrayList;
+
 /*
 Questa classe rappresenta un menu testuale generico a piu' voci
 Si suppone che la voce per uscire sia sempre associata alla scelta 0 
@@ -12,28 +15,27 @@ public class MyMenu
   final private static String INPUT_REQUEST = "Insert the number of the chosen option > ";
 
   private String title;
-  private String [] voices;
+  private ArrayList<String> voices;
   private int length;
-
-	
-  public MyMenu (String titolo, String [] voci)
+  
+  public MyMenu (String titolo, ArrayList<String> voci)
   {
 	this.title = titolo;
 	this.voices = voci;
-	this.length = voci.length;
+	this.length = voci.size();
   }
-
+  
   public int choose ()
   {
 	  
 	printMenu();
-	return InputData.readInteger(INPUT_REQUEST, 0, voices.length);	 
+	return InputData.readInteger(INPUT_REQUEST, 0, length);	 
   }
   
   public int chooseWithNoExitOption ()
   {
 	printLightMenu();
-	return InputData.readInteger(INPUT_REQUEST, 0, voices.length);	 
+	return InputData.readInteger(INPUT_REQUEST, 0, length);	 
   }
 		
   public void printMenu ()
@@ -43,9 +45,9 @@ public class MyMenu
 	System.out.println(title);
 	printFrame();
 	System.out.println();
-    for (int i=0; i<voices.length; i++)
+    for (int i=0; i<length; i++)
 	 {
-	  System.out.println( (i+1) + "\t" + voices[i]);
+	  System.out.println( (i+1) + "\t" + voices.get(i));
 	 }
     System.out.println();
 	System.out.println(EXIT_VOICE);
@@ -55,9 +57,9 @@ public class MyMenu
   public void printLightMenu ()
   {
 	System.out.println(title);
-    for (int i=0; i<voices.length; i++)
+    for (int i=0; i<length; i++)
 	 {
-	  System.out.println( (i+1) + "\t" + voices[i]);
+	  System.out.println( (i+1) + "\t" + voices.get(i));
 	 }
     System.out.println();
   }

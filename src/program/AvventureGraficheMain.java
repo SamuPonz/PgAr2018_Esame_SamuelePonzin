@@ -1,12 +1,16 @@
 package program;
 
+import java.awt.Desktop.Action;
+import java.nio.charset.spi.CharsetProvider;
+import java.util.ArrayList;
+
 import libraries.InputData;
 import libraries.MyMenu;
 
 public class AvventureGraficheMain {
 	
 	public static final String TITLE = "LIBRARY";
-	public static final String TITLE_REQUEST = "Tell me which story whould you like to see: ";
+	public static final String TITLE_REQUEST = "Tell me which story whould you like to find: ";
 	public static final String PLAY_REQUEST = "Would you like to play? press Y or N...  ";
 	public static final String SORTING_MESSAGE = "The stories have been sorted in alphabetic order";
 	public static final String[] OPTIONS = {"Show the collection of stories", "Search a story", "Sort the collection"};
@@ -15,8 +19,12 @@ public class AvventureGraficheMain {
 		
 		String[] files = {"PgAr2018_Story_2.1.xml","PgAr2018_Story_2.2.xml","PgAr2018_Story_5.1.xml","PgAr2018_Story_5.2.xml","PgAr2018_Story_6.1.xml"};
 		
-		MyMenu libraryMenu = new MyMenu(TITLE, OPTIONS);
-		int action;
+		ArrayList<String> options = new ArrayList<>();
+		for(String option : OPTIONS) {
+			options.add(option);
+		}
+		MyMenu libraryMenu = new MyMenu(TITLE, options);
+		int action = 0;
 		
 		Library library = Utility.read(files);
 		
@@ -33,9 +41,9 @@ public class AvventureGraficheMain {
 				}
 				while(story == null);
 				System.out.println(story.preview());
-				char c = InputData.readUpperChar(PLAY_REQUEST, "YN");
-				if( c == 'Y') {
-					play(story);
+				char c = InputData.readUpperChar(PLAY_REQUEST, "Y N y n");
+				if( c == 'Y' || c == 'y') {
+					story.play();
 				}
 				break;
 			case 3: 
@@ -44,6 +52,4 @@ public class AvventureGraficheMain {
 			}
 		} while(action != 0);				
 	}
-	
-	public static void play(Story story) {}
 }

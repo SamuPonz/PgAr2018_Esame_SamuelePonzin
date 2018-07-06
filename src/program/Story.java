@@ -3,6 +3,7 @@ package program;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+import libraries.InputData;
 import libraries.MyMenu;
 
 public class Story implements Comparable<Story>{
@@ -44,6 +45,28 @@ public class Story implements Comparable<Story>{
 		return chapters.get(id);
 	}
 	
+	public Paragraph getInitialChapter() {
+		return searchChapter(0);
+	}
+
+	public void play() {
+		Paragraph currentChapter = getInitialChapter();
+		int action = 0;
+		System.out.println("The game has started: ");
+		do {
+			System.out.println("---------------------------------");
+			System.out.println(currentChapter.getDescription());
+			System.out.println("---------------------------------");
+			for(Option option : currentChapter.getOptions()) {
+				System.out.println(option.getToChapter() + ") " + option.getMessage());
+			}
+			action = InputData.readInteger("select your action: ");
+			currentChapter = searchChapter(currentChapter.getOptions().get(action).getToChapter());
+		} while (currentChapter.getOptions().size() != 0);
+		System.out.println("end game");
+		
+	}
+	
 	///////////////////////////////////////////////////////////////////////
 	
 	public int getId() {
@@ -60,14 +83,6 @@ public class Story implements Comparable<Story>{
 
 	public void setChapters(ArrayList<Paragraph> chapters) {
 		this.chapters = chapters;
-	}
-
-	public Paragraph getInitialChapter() {
-		return initialChapter;
-	}
-
-	public void setInitialChapter(Paragraph initialChapter) {
-		this.initialChapter = initialChapter;
 	}
 
 //	public ArrayList<Paragraph> getFinalChapters() {

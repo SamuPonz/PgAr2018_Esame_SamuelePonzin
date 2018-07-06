@@ -18,17 +18,6 @@ public class Paragraph {
 		this.type = type;
 	}
 	
-	
-//	public void chapterMenu() {
-//		String[] optionMessages = null;
-//		int i = 0;
-//		for(Option option : options) {
-//			optionMessages[i] = option.getMessage();
-//			i++;
-//		}
-//		MyMenu chap = new MyMenu(description, optionMessages);
-//	}
-	
 	public void addPossibleChapter(int idChapter) {
 		possibleChapters.add(idChapter);
 	}
